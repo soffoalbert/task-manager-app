@@ -58,7 +58,7 @@ describe('TaskService (e2e)', () => {
     });
   });
 
-  describe('editTask', () => {
+  describe('completeTask', () => {
     it('should mark task as COMPLETED', async () => {
       // Add a task to edit
       const task = await service.add(
