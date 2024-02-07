@@ -84,14 +84,8 @@ describe('TaskService', () => {
     });
   });
 
-  describe('editTask', () => {
-    it('should successfully edit and save a task', async () => {
-      const task = new Task();
-      task.id = 1;
-      task.title = 'Original Title';
-      task.description = 'Original Description';
-      task.status = TaskStatus.NOT_COMPLETED;
-
+  describe('complete Task', () => {
+    it('should successfully complete and save a task', async () => {
       const updatedTask = {
         id: 1,
         status: TaskStatus.COMPLETED,
