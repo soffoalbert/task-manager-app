@@ -27,11 +27,11 @@ async function bootstrap() {
       },
     })
     .command({
-      command: 'update <id> <newTitle> <newDescription> <newStatus>',
+      command: 'complete <id>',
       describe: 'Update a task',
       handler: async (argv) => {
-        const { id, newTitle, newDescription, newStatus } = argv;
-        const updatedUser = await taskService.editTask(id,  newTitle, newDescription, newStatus);
+        const { id } = argv;
+        const updatedUser = await taskService.complete(id);
         console.log('User updated:', updatedUser);
       },
     })

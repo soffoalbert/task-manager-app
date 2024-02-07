@@ -84,16 +84,6 @@ describe('TaskService', () => {
     });
   });
 
-  describe('isTaskStatus', () => {
-    it('should return true for a valid TaskStatus value', () => {
-      expect(service.isTaskStatus(TaskStatus.COMPLETED)).toBeTruthy();
-    });
-
-    it('should return false for an invalid TaskStatus value', () => {
-      expect(service.isTaskStatus('INVALID_STATUS')).toBeFalsy();
-    });
-  });
-
   describe('editTask', () => {
     it('should successfully edit and save a task', async () => {
       const task = new Task();
@@ -104,19 +94,14 @@ describe('TaskService', () => {
 
       const updatedTask = {
         id: 1,
-        title: 'Updated Title',
-        description: 'Updated Description',
         status: TaskStatus.COMPLETED,
       };
 
       repository.preload.mockResolvedValue(updatedTask);
       repository.save.mockResolvedValue(updatedTask);
 
-      const result = await service.editTask(
-        1,
-        'Updated Title',
-        'Updated Description',
-        TaskStatus.COMPLETED,
+      const result = await service.complete(
+        1
       );
 
       expect(result).toEqual(updatedTask);
@@ -128,11 +113,8 @@ describe('TaskService', () => {
       repository.preload.mockResolvedValue(undefined); // Simulate task not found
 
       await expect(
-        service.editTask(
-          99,
-          'New Title',
-          'New Description',
-          TaskStatus.COMPLETED,
+        service.complete(
+          99
         ),
       ).rejects.toThrow(`task #99 does not exist`);
     });
