@@ -58,56 +58,28 @@ describe('TaskService (e2e)', () => {
     });
   });
 
-  describe('editTask', () => {
-    it('should edit a task successfully', async () => {
+  describe('completeTask', () => {
+    it('should mark task as COMPLETED', async () => {
       // Add a task to edit
       const task = await service.add(
         'Task to Edit',
         'Edit this task',
         TaskStatus.NOT_COMPLETED,
       );
-      const editedTitle = 'Edited Task Title';
-      const editedDescription = 'Edited description';
-      const editedStatus = TaskStatus.COMPLETED;
-
       // Edit the task
-      const editedTask = await service.editTask(
-        task.id,
-        editedTitle,
-        editedDescription,
-        editedStatus,
+      const editedTask = await service.complete(
+        task.id
       );
-      expect(editedTask.title).toEqual(editedTitle);
-      expect(editedTask.description).toEqual(editedDescription);
-      expect(editedTask.status).toEqual(editedStatus);
+      expect(editedTask.status).toEqual(TaskStatus.COMPLETED);
     });
 
     it('should throw an error if the task does not exist', async () => {
       const nonExistentTaskId = 999; // Assuming 999 is an unlikely ID
       await expect(
-        service.editTask(
-          nonExistentTaskId,
-          'Title',
-          'Description',
-          TaskStatus.COMPLETED,
+        service.complete(
+          nonExistentTaskId
         ),
       ).rejects.toThrowError(`task #${nonExistentTaskId} does not exist`);
-    });
-
-    it('should throw an error if the status is invalid', async () => {
-      // Add a task to attempt to edit with an invalid status
-      const task = await service.add(
-        'Task to Misedit',
-        'This task will fail editing',
-        TaskStatus.NOT_COMPLETED,
-      );
-      const invalidStatus = 'INVALID_STATUS'; // Simulate an invalid status
-
-      await expect(
-        service.editTask(task.id, 'Title', 'Description', invalidStatus as any),
-      ).rejects.toThrowError(
-        'The Task status must be a valid TaskStatus value.',
-      );
     });
   });
 });

@@ -31,29 +31,14 @@ export class TaskService {
     await this.taskRepo.delete(id);
   }
 
-  isTaskStatus(value: any): value is TaskStatus {
-    return Object.values(TaskStatus).includes(value);
-  }
-
-  async editTask(
-    id: number,
-    newTitle: string,
-    newDescription: string,
-    status: TaskStatus,
+  async complete(
+    id: number
   ): Promise<Task> {
     const newTask: Task = new Task();
-
-    if (!this.isTaskStatus(status)) {
-      throw new Error('The Task status must be a valid TaskStatus value.');
-    }
-
-    newTask.title = newTitle;
-    newTask.description = newDescription;
-    newTask.status = status;
     try {
       const task = await this.taskRepo.preload({
         id,
-        ...newTask,
+        status: TaskStatus.COMPLETED
       });
       if (!task) {
         throw new Error(`task #${id} does not exist`);
