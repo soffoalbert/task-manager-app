@@ -35,11 +35,11 @@ export class TaskService {
     id: number
   ): Promise<Task> {
     const newTask: Task = new Task();
-
+    newTask.status = TaskStatus.COMPLETED
     try {
       const task = await this.taskRepo.preload({
         id,
-        status: TaskStatus.COMPLETED
+        ...newTask
       });
       if (!task) {
         throw new Error(`task #${id} does not exist`);
