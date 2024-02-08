@@ -42,9 +42,10 @@ async function bootstrap() {
       handler: async (argv) => {
         const { id } = argv;
         await taskService.removeTask(id);
-        console.log('User deleted');
+        console.log('Task deleted');
       },
     })
+    .strictCommands()
     .help().argv;
 }
 bootstrap();
