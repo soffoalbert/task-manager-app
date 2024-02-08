@@ -33,11 +33,13 @@ Follow instructions for your operating system to download and install PostgreSQL
 
 and also create and populate the .env file in the root directory of the application and add the following config:
 
+``` 
 POSTGRES_HOST=localhost
 POSTGRES_PORT=<port>
 POSTGRES_USER=<user name>
 POSTGRES_PASSWORD=<password>
 POSTGRES_DB=task-db
+```
 
 
 ### Running the Application
