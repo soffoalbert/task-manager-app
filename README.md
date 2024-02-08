@@ -19,6 +19,10 @@ cd task-manager-app
 
 ```npm install```
 
+### Running Integration Tests:
+
+```npm run test:e2e```
+
 ### Running the Application
 The application can be run directly via an npm script that has been set up in the package.json. To run the application and interact with the CLI, use the following command:
 
