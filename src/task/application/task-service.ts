@@ -17,7 +17,7 @@ export class TaskService {
     status: string,
   ): Promise<Task> {
     try {
-      const tmpTask = this.taskFactory.create( title, description, status );
+      const tmpTask = this.taskFactory.create( title, description, new TaskStatus('not_complete').value);
       return await this.taskRepo.save(tmpTask);
     } catch (error) {
       console.error('Error adding task:', error);
@@ -27,6 +27,10 @@ export class TaskService {
 
   async findAll(): Promise<Task[]> {
     return this.taskRepo.findAll();
+  }
+
+  async query(query: string): Promise<void> {
+     this.taskRepo.query(query);
   }
 
   async removeTask(id: number): Promise<void> {
@@ -39,6 +43,7 @@ export class TaskService {
 
     try {
       const task = await this.taskRepo.preload(id, new TaskStatus('complete'));
+      console.log(task)
       if (!task) {
         throw new Error(`task #${id} does not exist`);
       }

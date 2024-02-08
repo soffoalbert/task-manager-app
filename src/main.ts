@@ -29,7 +29,7 @@ async function bootstrap() {
     })
     .command({
       command: 'complete <id>',
-      describe: 'Complete a task',
+      describe: 'complete a task',
       handler: async (argv) => {
         const { id } = argv;
         const updatedUser = await taskService.complete(id);
@@ -37,8 +37,8 @@ async function bootstrap() {
       },
     })
     .command({
-      command: 'delete <id>',
-      describe: 'Delete a task',
+      command: 'remove <id>',
+      describe: 'remove a task',
       handler: async (argv) => {
         const { id } = argv;
         await taskService.removeTask(id);

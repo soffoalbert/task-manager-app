@@ -3,6 +3,8 @@ import { Repository } from 'typeorm';
 import { AppModule } from '../src/app.module';
 import { TaskService } from '../src/task/application/task-service';
 import { Task } from '../src/task/infrastructure/persistence/entities/task.entity';
+import { TaskRepository } from '../src/task/application/ports/task.repository';
+import { TaskRepositoryImpl } from '../src/task/infrastructure/persistence/repositories/task.repository';
 
 describe('TaskService (e2e)', () => {
   let service: TaskService;
@@ -10,30 +12,29 @@ describe('TaskService (e2e)', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        AppModule.register({
+          driver: 'orm',
+        }),
+      ],
     }).compile();
 
     service = module.get<TaskService>(TaskService);
-    repository = module.get<Repository<Task>>('TaskRepository');
-    await repository.query(`DELETE FROM task;`);
+    await service.query(`DELETE FROM task;`);
   });
 
   afterEach(async () => {
-    await repository.query(`DELETE FROM task;`);
+    await service.query(`DELETE FROM task;`);
   });
 
   describe('add and findAll tasks', () => {
     it('should add a task and retrieve it', async () => {
-      await service.add(
-        'Test Task',
-        'Test Description',
-        'not_complete',
-      );
+      await service.add('Test Task', 'Test Description', 'not_complete');
       const tasks = await service.findAll();
       expect(tasks).toHaveLength(1);
       expect(tasks[0].title).toEqual('Test Task');
       expect(tasks[0].description).toEqual('Test Description');
-      expect(tasks[0].status).toEqual('not_complete');
+      expect(tasks[0].status.value).toEqual('not_complete');
     });
   });
 
@@ -58,33 +59,29 @@ describe('TaskService (e2e)', () => {
   });
 
   describe('editTask', () => {
-    it('should edit a task successfully', async () => {
+    it('should complete a task successfully', async () => {
       // Add a task to edit
       const task = await service.add(
         'Task to Edit',
         'Edit this task',
         'not_complete',
       );
-      const editedTitle = 'Edited Task Title';
-      const editedDescription = 'Edited description';
-      const editedStatus = 'not_complete';
+      const editedTitle = 'Task to Edit';
+      const editedDescription =  'Edit this task';
+      const editedStatus = 'complete';
 
       // Edit the task
-      const editedTask = await service.complete(
-        task.id
-      );
+      const editedTask = await service.complete(task.id);
       expect(editedTask.title).toEqual(editedTitle);
       expect(editedTask.description).toEqual(editedDescription);
-      expect(editedTask.status).toEqual(editedStatus);
+      expect(editedTask.status.value).toEqual(editedStatus);
     });
 
     it('should throw an error if the task does not exist', async () => {
       const nonExistentTaskId = 999; // Assuming 999 is an unlikely ID
-      await expect(
-        service.complete(
-          nonExistentTaskId,
-        ),
-      ).rejects.toThrowError(`task #${nonExistentTaskId} does not exist`);
+      await expect(service.complete(nonExistentTaskId)).rejects.toThrowError(
+        `task #${nonExistentTaskId} does not exist`,
+      );
     });
   });
 });

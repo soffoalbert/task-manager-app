@@ -13,14 +13,21 @@ export class TaskRepositoryImpl implements TaskRepository {
     @InjectRepository(TaskEntity)
     private readonly taskRepository: Repository<TaskEntity>,
   ) {}
-  async preload(id: number, status: TaskStatus): Promise<TaskModel> {
-    return TaskMapper.toDomain(await this.taskRepository.preload({id, status: status.value}));
+
+  async query(query: string): Promise<void> {
+    await this.taskRepository.query(query);
   }
-  delete(id: number): Promise<TaskModel> {
-    throw new Error('Method not implemented.');
-  } 
-  update(alarm: TaskModel): Promise<TaskModel> {
-    throw new Error('Method not implemented.');
+  async preload(id: number, status: TaskStatus): Promise<TaskModel> {
+    const task = await this.taskRepository.preload({
+      id,
+      status: status.value,
+    });
+    if (task) {
+      return TaskMapper.toDomain(task);
+    }
+  }
+  async delete(id: number): Promise<void> {
+    await this.taskRepository.delete(id);
   }
 
   async findAll(): Promise<TaskModel[]> {

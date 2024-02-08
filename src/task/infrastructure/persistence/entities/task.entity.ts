@@ -12,6 +12,7 @@ export class Task {
   @Column()
   description: string;
 
+  @Column()
   status: string
 
   constructor(init?: Partial<Task>) {
