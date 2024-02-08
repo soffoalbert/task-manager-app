@@ -23,6 +23,20 @@ cd task-manager-app
 
 ```npm run test:e2e```
 
+### Install PostgresSQL
+
+Follow instructions for your operating system to download and install PostgreSQL. Once installed, create a DB called task-db
+
+and also create and populate the .env file in the root directory of the application and add the following config:
+
+``` 
+POSTGRES_HOST=localhost
+POSTGRES_PORT=<port>
+POSTGRES_USER=<user name>
+POSTGRES_PASSWORD=<password>
+POSTGRES_DB=task-db
+```
+
 ### Running the Application
 The application can be run directly via an npm script that has been set up in the package.json. To run the application and interact with the CLI, use the following command:
 
