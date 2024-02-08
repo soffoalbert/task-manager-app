@@ -23,7 +23,7 @@ async function bootstrap() {
       handler: async (argv) => {
         const { title, description } = argv;
         const newUser = await taskService.add(title, description, TaskStatus.NOT_COMPLETED);
-        console.log('User added:', newUser);
+        console.log('Task added:', newUser);
       },
     })
     .command({
@@ -36,14 +36,15 @@ async function bootstrap() {
       },
     })
     .command({
-      command: 'delete <id>',
-      describe: 'Delete a task',
+      command: 'remove <id>',
+      describe: 'Remove a task',
       handler: async (argv) => {
         const { id } = argv;
         await taskService.removeTask(id);
-        console.log('User deleted');
+        console.log('Task removed');
       },
     })
+    .strictCommands()
     .help().argv;
 }
 bootstrap();
