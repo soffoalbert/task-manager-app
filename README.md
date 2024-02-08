@@ -19,14 +19,6 @@ cd task-manager-app
 
 ```npm install```
 
-### Running Integration Tests:
-
-```npm run test:e2e```
-
-### Running Unit Tests:
-
-```npm run test```
-
 ### Install PostgresSQL
 
 Follow instructions for your operating system to download and install PostgreSQL. Once installed, create a DB called task-db
@@ -40,6 +32,15 @@ POSTGRES_USER=<user name>
 POSTGRES_PASSWORD=<password>
 POSTGRES_DB=task-db
 ```
+
+### Running Integration Tests:
+
+```npm run test:e2e```
+
+### Running Unit Tests:
+
+```npm run test```
+
 
 
 ### Running the Application
