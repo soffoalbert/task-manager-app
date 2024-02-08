@@ -49,11 +49,11 @@ The application can be run directly via an npm script that has been set up in th
 
 ### Update a task: Updates an existing task's title, description, and status.
 
-```npm run start:cli -- update <id> "<newTitle>" "<newDescription>" <newStatus>```
+```npm run start:cli -- complete <id>```
 
 ### Delete a task: Deletes a task by its ID.
 
-```npm run start:cli -- delete <id>```
+```npm run start:cli -- remove <id>```
 
 
 ## Benefits of Using NestJS
