@@ -1,11 +1,12 @@
 import * as yargs from 'yargs';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { TaskService } from './task/task.service';
-import { TaskStatus } from './task/entities/task.entity';
+import { TaskService } from './task/application/task-service';
 
 async function bootstrap() {
-  const app = await NestFactory.createApplicationContext(AppModule);
+  const app = await NestFactory.createApplicationContext(AppModule.register({ 
+    driver: 'orm'
+  }));
   const taskService = app.get(TaskService);
 
   yargs
@@ -22,17 +23,17 @@ async function bootstrap() {
       describe: 'Add a new task',
       handler: async (argv) => {
         const { title, description } = argv;
-        const newUser = await taskService.add(title, description, TaskStatus.NOT_COMPLETED);
-        console.log('User added:', newUser);
+        const newUser = await taskService.add(title, description, 'not_completed');
+        console.log('Task added:', newUser);
       },
     })
     .command({
-      command: 'update <id> <newTitle> <newDescription> <newStatus>',
-      describe: 'Update a task',
+      command: 'complete <id>',
+      describe: 'Complete a task',
       handler: async (argv) => {
-        const { id, newTitle, newDescription, newStatus } = argv;
-        const updatedUser = await taskService.editTask(id,  newTitle, newDescription, newStatus);
-        console.log('User updated:', updatedUser);
+        const { id } = argv;
+        const updatedUser = await taskService.complete(id);
+        console.log('Task completed:', updatedUser);
       },
     })
     .command({

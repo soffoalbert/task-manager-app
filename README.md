@@ -59,3 +59,16 @@ Comprehensive Documentation: The framework is well-documented, making it easier 
 
 By utilizing NestJS, this Task Manager application benefits from the framework's robustness, scalability, and ease of maintenance, making it a solid choice for enterprise-grade applications.
 
+## Hexagonal Architecture
+
+Hexagonal Architecture, also known as Ports and Adapters Architecture, is a software design pattern that aims to create loosely coupled application components that can be easily connected to their software environment through ports and adapters. This architecture emphasizes the separation of concerns by isolating the core logic of the application from external elements like databases, web interfaces, or other services.
+
+### Benefits of Hexagonal Architecture include:
+Improved Testability: By decoupling the core logic from external components, it becomes easier to test the application in isolation, leading to more reliable software.
+Flexibility and Scalability: Changes to external services or databases do not impact the core application logic, making it easier to update or replace those external components.
+
+Enhanced Maintainability: The clear separation of concerns and the isolation of the application's core logic simplify understanding and maintaining the codebase.
+Facilitates Continuous Deployment: With a decoupled design, parts of the system can be independently deployed or updated, supporting continuous integration and deployment practices.
+
+Overall, Hexagonal Architecture allows for creating more maintainable, scalable, and adaptable software applications by promoting loose coupling and emphasizing the separation between the application's core logic and external concerns.
+

@@ -1,9 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Task, TaskStatus } from '../src/task/entities/task.entity';
 import { Repository } from 'typeorm';
-import { TaskService } from '../src/task/task.service';
 import { AppModule } from '../src/app.module';
+import { TaskService } from '../src/task/application/task-service';
+import { Task } from '../src/task/infrastructure/persistence/entities/task.entity';
 
 describe('TaskService (e2e)', () => {
   let service: TaskService;
@@ -28,13 +27,13 @@ describe('TaskService (e2e)', () => {
       await service.add(
         'Test Task',
         'Test Description',
-        TaskStatus.NOT_COMPLETED,
+        'not_complete',
       );
       const tasks = await service.findAll();
       expect(tasks).toHaveLength(1);
       expect(tasks[0].title).toEqual('Test Task');
       expect(tasks[0].description).toEqual('Test Description');
-      expect(tasks[0].status).toEqual(TaskStatus.NOT_COMPLETED);
+      expect(tasks[0].status).toEqual('not_complete');
     });
   });
 
@@ -44,7 +43,7 @@ describe('TaskService (e2e)', () => {
       const task = await service.add(
         'Task to Remove',
         'Remove this task',
-        TaskStatus.NOT_COMPLETED,
+        'not_complete',
       );
       expect(await service.findAll()).toHaveLength(1); // Ensure the task is added
 
@@ -64,18 +63,15 @@ describe('TaskService (e2e)', () => {
       const task = await service.add(
         'Task to Edit',
         'Edit this task',
-        TaskStatus.NOT_COMPLETED,
+        'not_complete',
       );
       const editedTitle = 'Edited Task Title';
       const editedDescription = 'Edited description';
-      const editedStatus = TaskStatus.COMPLETED;
+      const editedStatus = 'not_complete';
 
       // Edit the task
-      const editedTask = await service.editTask(
-        task.id,
-        editedTitle,
-        editedDescription,
-        editedStatus,
+      const editedTask = await service.complete(
+        task.id
       );
       expect(editedTask.title).toEqual(editedTitle);
       expect(editedTask.description).toEqual(editedDescription);
@@ -85,29 +81,10 @@ describe('TaskService (e2e)', () => {
     it('should throw an error if the task does not exist', async () => {
       const nonExistentTaskId = 999; // Assuming 999 is an unlikely ID
       await expect(
-        service.editTask(
+        service.complete(
           nonExistentTaskId,
-          'Title',
-          'Description',
-          TaskStatus.COMPLETED,
         ),
       ).rejects.toThrowError(`task #${nonExistentTaskId} does not exist`);
-    });
-
-    it('should throw an error if the status is invalid', async () => {
-      // Add a task to attempt to edit with an invalid status
-      const task = await service.add(
-        'Task to Misedit',
-        'This task will fail editing',
-        TaskStatus.NOT_COMPLETED,
-      );
-      const invalidStatus = 'INVALID_STATUS'; // Simulate an invalid status
-
-      await expect(
-        service.editTask(task.id, 'Title', 'Description', invalidStatus as any),
-      ).rejects.toThrowError(
-        'The Task status must be a valid TaskStatus value.',
-      );
     });
   });
 });
