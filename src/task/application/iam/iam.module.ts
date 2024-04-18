@@ -10,6 +10,7 @@ import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
 import { TaskPersistenceModule } from '@src/task/infrastructure/persistence/persistence.module';
 import { AuthenticationGuard } from './authentication.guard';
+import { RolesGuard } from './authorization/roles.guard';
 
 @Module({
   imports: [
@@ -25,6 +26,10 @@ import { AuthenticationGuard } from './authentication.guard';
     {
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
     AuthenticationService,
     AccessTokenGuard,

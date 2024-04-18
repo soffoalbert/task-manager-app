@@ -7,6 +7,8 @@ import { UserModel } from '@src/task/domain/user';
 import { JwtService } from '@nestjs/jwt';
 import jwtConfig from './jwt.config';
 import { ConfigType } from '@nestjs/config';
+import { randomUUID } from 'crypto';
+import { ActiveUserData } from './active-user-data.interface';
 
 @Injectable()
 export class AuthenticationService {
@@ -38,7 +40,8 @@ export class AuthenticationService {
       {
         sub: user.id,
         email: user.email,
-      },
+        role: user.role,
+      } as ActiveUserData,
       {
         audience: this.jwtConfiguration.audience,
         issuer: this.jwtConfiguration.issuer,
