@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: NestApplication) {
   const config = new DocumentBuilder()
-    .setTitle('The Task manager API')
+    .setTitle('The Task API')
     .setDescription('This API managers all task related data')
     .setVersion('1.0')
     .addBearerAuth()

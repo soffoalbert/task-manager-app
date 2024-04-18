@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskRepositoryImpl } from './repositories/task.repository';
 import { Task } from './entities/task.entity';
-import { TaskRepository } from '@src/task/application/ports/task.repository';
-import { UserRepository } from '@src/task/application/ports/user.repository';
+import { TaskRepository } from '../../application/ports/task.repository';
+import { UserRepository } from '../../application/ports/user.repository';
 import { UserRepositoryImpl } from './repositories/user.repository';
 import { UserEntity } from './entities/user.entity';
-import { HashingService } from '@src/task/application/iam/hashing-service';
-import { BcryptService } from '@src/task/application/iam/bcrypt-service';
+import { HashingService } from '../../application/iam/hashing-service';
+import { BcryptService } from '../../application/iam/bcrypt-service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Task, UserEntity])],

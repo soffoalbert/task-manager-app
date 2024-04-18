@@ -5,7 +5,7 @@ import * as Joi from '@hapi/joi';
 import { ApplicationBootstrapOptions } from './common/interfaces/application-bootstrap-options.interface';
 import { TasksModule } from './task/application/tasks.module';
 import { TaskInfrastructureModule } from './task/infrastructure/task-infrastructure.module';
-import { CoreModule } from '@core/core.module';
+import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [

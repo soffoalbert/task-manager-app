@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Task } from '../task/infrastructure/persistence/entities/task.entity';
-import { UserEntity } from '@src/task/infrastructure/persistence/entities/user.entity';
+import { UserEntity } from '../task/infrastructure/persistence/entities/user.entity';
 
 @Module({
   imports: [

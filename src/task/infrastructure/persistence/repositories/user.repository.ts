@@ -1,11 +1,11 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from '@src/task/application/ports/user.repository';
-import { UserModel } from '@src/task/domain/user';
+import { UserRepository } from '../../../application/ports/user.repository';
+import { UserModel } from '../../../domain/user';
 import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { UserMapper } from '../mappers/user.mappers';
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
-import { HashingService } from '@src/task/application/iam/hashing-service';
+import { HashingService } from '../../../application/iam/hashing-service';
 
 export class UserRepositoryImpl implements UserRepository {
   constructor(

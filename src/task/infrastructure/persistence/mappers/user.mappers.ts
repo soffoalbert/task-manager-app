@@ -1,4 +1,4 @@
-import { UserModel } from '@src/task/domain/user';
+import { UserModel } from '../../..//domain/user';
 import { UserEntity } from '../entities/user.entity';
 
 export class UserMapper {
