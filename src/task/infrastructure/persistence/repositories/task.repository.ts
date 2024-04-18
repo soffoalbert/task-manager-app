@@ -14,14 +14,28 @@ export class TaskRepositoryImpl implements TaskRepository {
     private readonly taskRepository: Repository<TaskEntity>,
   ) {}
 
+  async preload(id: number, taskModel: TaskModel): Promise<TaskModel> {
+    const task = await this.taskRepository.preload({
+      id: +id,
+      description: taskModel.description,
+      status: taskModel?.status?.value,
+      title: taskModel.title,
+    });
+    console.log(task);
+    if (task) {
+      return TaskMapper.toDomain(task);
+    }
+  }
+
   async query(query: string): Promise<void> {
     await this.taskRepository.query(query);
   }
-  async preload(id: number, status: TaskStatus): Promise<TaskModel> {
+  async preloadStatus(id: number, status: TaskStatus): Promise<TaskModel> {
     const task = await this.taskRepository.preload({
-      id,
+      id: +id,
       status: status.value,
     });
+    console.log(task);
     if (task) {
       return TaskMapper.toDomain(task);
     }

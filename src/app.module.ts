@@ -1,18 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
-import { CqrsModule } from '@nestjs/cqrs';
 import { ApplicationBootstrapOptions } from './common/interfaces/application-bootstrap-options.interface';
-import { CoreModule } from '../src/core/core.module';
 import { TasksModule } from './task/application/tasks.module';
 import { TaskInfrastructureModule } from './task/infrastructure/task-infrastructure.module';
+import { CoreModule } from '@core/core.module';
 
 @Module({
   imports: [
     CoreModule,
-    CqrsModule.forRoot(),
     ConfigModule.forRoot({
       load: [] ,
       validationSchema: Joi.object({
@@ -25,7 +22,6 @@ import { TaskInfrastructureModule } from './task/infrastructure/task-infrastruct
       }),
     }),
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {

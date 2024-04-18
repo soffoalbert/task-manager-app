@@ -1,4 +1,3 @@
-import { TaskStatus } from "../../../../../src/task/domain/value-objects/task-status";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

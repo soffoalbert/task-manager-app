@@ -5,6 +5,7 @@ export abstract class TaskRepository {
   abstract findAll(): Promise<Task[]>;
   abstract save(task: Task): Promise<Task>;
   abstract delete(id: number): Promise<void>;
-  abstract preload(id: number, status: TaskStatus): Promise<Task>;
+  abstract preloadStatus(id: number, status: TaskStatus): Promise<Task>;
+  abstract preload(id: number, task: Task): Promise<Task>;
   abstract query(query: string): Promise<void>;
 }
