@@ -39,11 +39,9 @@ export class TaskService {
   }
 
   async updateTask(inputTask: Task, id: number) {
-    console.log(inputTask);
 
     try {
       const task = await this.taskRepo.preload(+id, inputTask);
-      console.log(task);
       if (!task) {
         throw new Error(`task #${id} does not exist`);
       }

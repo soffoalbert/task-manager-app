@@ -1,13 +1,15 @@
-import { NestFactory } from '@nestjs/core';
+import { NestApplication, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { setupSwagger } from './swagger-config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(
+  const app: NestApplication = await NestFactory.create(
     AppModule.register({
       driver: 'orm',
     }),
   );
+  setupSwagger(app);
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

@@ -763,6 +763,11 @@
     "semver" "^7.3.5"
     "tar" "^6.1.11"
 
+"@microsoft/tsdoc@^0.14.2":
+  "integrity" "sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug=="
+  "resolved" "https://registry.npmjs.org/@microsoft/tsdoc/-/tsdoc-0.14.2.tgz"
+  "version" "0.14.2"
+
 "@mongodb-js/saslprep@^1.1.0":
   "integrity" "sha512-8zJ8N1x51xo9hwPh6AWnKdLGEC5N3lDa6kms1YHmFBoRhTpJR6HG8wWk0td1MVCu9cD4YBrvjZEtd5Obw0Fbnw=="
   "resolved" "https://registry.npmjs.org/@mongodb-js/saslprep/-/saslprep-1.1.4.tgz"
@@ -844,7 +849,7 @@
     "@types/jsonwebtoken" "9.0.5"
     "jsonwebtoken" "9.0.2"
 
-"@nestjs/mapped-types@*":
+"@nestjs/mapped-types@*", "@nestjs/mapped-types@2.0.5":
   "integrity" "sha512-bSJv4pd6EY99NX9CjBIyn4TVDoSit82DUZlL4I3bqNfy5Gt+gXTa86i3I/i0iIV9P4hntcGM5GyO+FhZAhxtyg=="
   "resolved" "https://registry.npmjs.org/@nestjs/mapped-types/-/mapped-types-2.0.5.tgz"
   "version" "2.0.5"
@@ -885,6 +890,18 @@
     "fs-extra" "10.1.0"
     "jsonc-parser" "3.0.0"
     "pluralize" "8.0.0"
+
+"@nestjs/swagger@7.3.1":
+  "integrity" "sha512-LUC4mr+5oAleEC/a2j8pNRh1S5xhKXJ1Gal5ZdRjt9XebQgbngXCdW7JTA9WOEcwGtFZN9EnKYdquzH971LZfw=="
+  "resolved" "https://registry.npmjs.org/@nestjs/swagger/-/swagger-7.3.1.tgz"
+  "version" "7.3.1"
+  dependencies:
+    "@microsoft/tsdoc" "^0.14.2"
+    "@nestjs/mapped-types" "2.0.5"
+    "js-yaml" "4.1.0"
+    "lodash" "4.17.21"
+    "path-to-regexp" "3.2.0"
+    "swagger-ui-dist" "5.11.2"
 
 "@nestjs/testing@^9.0.0":
   "integrity" "sha512-LDT8Ai2eKnTzvnPaJwWOK03qTaFap5uHHsJCv6dL0uKWk6hyF9jms8DjyVaGsaujCaXDG8izl1mDEER0OmxaZA=="
@@ -3815,7 +3832,7 @@
     "argparse" "^1.0.7"
     "esprima" "^4.0.0"
 
-"js-yaml@^4.1.0":
+"js-yaml@^4.1.0", "js-yaml@4.1.0":
   "integrity" "sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA=="
   "resolved" "https://registry.npmjs.org/js-yaml/-/js-yaml-4.1.0.tgz"
   "version" "4.1.0"
@@ -5418,6 +5435,11 @@
   "integrity" "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="
   "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   "version" "1.0.0"
+
+"swagger-ui-dist@5.11.2":
+  "integrity" "sha512-jQG0cRgJNMZ7aCoiFofnoojeSaa/+KgWaDlfgs8QN+BXoGMpxeMVY5OEnjq4OlNvF3yjftO8c9GRAgcHlO+u7A=="
+  "resolved" "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-5.11.2.tgz"
+  "version" "5.11.2"
 
 "symbol-observable@4.0.0":
   "integrity" "sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ=="

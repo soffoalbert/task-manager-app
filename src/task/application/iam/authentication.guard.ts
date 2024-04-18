@@ -39,7 +39,7 @@ export class AuthenticationGuard implements CanActivate {
       ).catch((err) => {
         error = err;
       });
-      console.log(canActivate);
+      console.log("test", canActivate);
       if (canActivate) {
         return true;
       }

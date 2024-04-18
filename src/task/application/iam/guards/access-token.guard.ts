@@ -24,6 +24,8 @@ export class AccessTokenGuard implements CanActivate {
     // wrapper GqlExecutionContext here instead.
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
+    console.log("acc", token);
+
     if (!token) {
       throw new UnauthorizedException();
     }
