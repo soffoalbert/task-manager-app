@@ -2,6 +2,7 @@ import * as yargs from 'yargs';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { TaskService } from './task/application/task-service';
+import { TaskStatus } from './task/domain/value-objects/task-status';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule.register({ 
@@ -23,7 +24,7 @@ async function bootstrap() {
       describe: 'Add a new task',
       handler: async (argv) => {
         const { title, description } = argv;
-        const newUser = await taskService.add(title, description, 'not_completed');
+        const newUser = await taskService.add(title, description, TaskStatus.NOT_COMPLETED);
         console.log('Task added:', newUser);
       },
     })
@@ -31,18 +32,18 @@ async function bootstrap() {
       command: 'complete <id>',
       describe: 'complete a task',
       handler: async (argv) => {
-        const { id } = argv;
-        const updatedUser = await taskService.complete(id);
-        console.log('Task completed:', updatedUser);
+        const { id, newTitle, newDescription, newStatus } = argv;
+        const updatedUser = await taskService.editTask(id,  newTitle, newDescription, newStatus);
+        console.log('User updated:', updatedUser);
       },
     })
     .command({
-      command: 'remove <id>',
-      describe: 'remove a task',
+      command: 'delete <id>',
+      describe: 'Delete a task',
       handler: async (argv) => {
         const { id } = argv;
         await taskService.removeTask(id);
-        console.log('Task deleted');
+        console.log('User deleted');
       },
     })
     .strictCommands()

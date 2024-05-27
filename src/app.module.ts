@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TaskModule } from './task/task.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -25,8 +24,6 @@ import { CoreModule } from '../src/core/core.module';
       }),
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {
   static register(options: ApplicationBootstrapOptions) {

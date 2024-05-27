@@ -58,29 +58,55 @@ describe('TaskService (e2e)', () => {
     });
   });
 
-  describe('editTask', () => {
-    it('should complete a task successfully', async () => {
+  describe('completeTask', () => {
+    it('should mark task as COMPLETED', async () => {
       // Add a task to edit
       const task = await service.add(
         'Task to Edit',
         'Edit this task',
         'not_complete',
       );
-      const editedTitle = 'Task to Edit';
-      const editedDescription =  'Edit this task';
-      const editedStatus = 'complete';
+      const editedTitle = 'Edited Task Title';
+      const editedDescription = 'Edited description';
+      const editedStatus = TaskStatus.COMPLETED;
 
       // Edit the task
-      const editedTask = await service.complete(task.id);
+      const editedTask = await service.editTask(
+        task.id,
+        editedTitle,
+        editedDescription,
+        editedStatus,
+      );
       expect(editedTask.title).toEqual(editedTitle);
       expect(editedTask.description).toEqual(editedDescription);
-      expect(editedTask.status.value).toEqual(editedStatus);
+      expect(editedTask.status).toEqual(editedStatus);
     });
 
     it('should throw an error if the task does not exist', async () => {
       const nonExistentTaskId = 999; // Assuming 999 is an unlikely ID
-      await expect(service.complete(nonExistentTaskId)).rejects.toThrowError(
-        `task #${nonExistentTaskId} does not exist`,
+      await expect(
+        service.editTask(
+          nonExistentTaskId,
+          'Title',
+          'Description',
+          TaskStatus.COMPLETED,
+        ),
+      ).rejects.toThrowError(`task #${nonExistentTaskId} does not exist`);
+    });
+
+    it('should throw an error if the status is invalid', async () => {
+      // Add a task to attempt to edit with an invalid status
+      const task = await service.add(
+        'Task to Misedit',
+        'This task will fail editing',
+        TaskStatus.NOT_COMPLETED,
+      );
+      const invalidStatus = 'INVALID_STATUS'; // Simulate an invalid status
+
+      await expect(
+        service.editTask(task.id, 'Title', 'Description', invalidStatus as any),
+      ).rejects.toThrowError(
+        'The Task status must be a valid TaskStatus value.',
       );
     });
   });

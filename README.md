@@ -1,4 +1,4 @@
-# Task Manager Application
+# Task Management System
 
 This Task Manager application is built with NestJS and provides a command-line interface for managing tasks. It utilizes the `yargs` package to handle CLI commands and NestJS for the application framework.
 
@@ -36,6 +36,11 @@ POSTGRES_DB=task-db
 ### Running Integration Tests:
 
 ```npm run test:e2e```
+
+### Running Unit Tests:
+
+```npm run test```
+
 
 
 ### Running the Application
