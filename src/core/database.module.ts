@@ -17,7 +17,6 @@ import { Task } from '../task/infrastructure/persistence/entities/task.entity';
         database: configService.get('POSTGRES_DB'),
         entities: [Task],
         synchronize: true,
-        // logging: true
       }),
     }),
   ],

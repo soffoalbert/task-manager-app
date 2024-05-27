@@ -1,6 +1,6 @@
-import { Task } from '../../../../../src/task/domain/task';
 import { TaskStatus } from '../../../../../src/task/domain/value-objects/task-status';
 import { Task as TaskEntity } from '../entities/task.entity';
+import { Task } from '../../../../../src/task/domain/task';
 
 export class TaskMapper {
   static toDomain(taskEntity: TaskEntity): Task {
