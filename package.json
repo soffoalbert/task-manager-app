@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@langchain/community": "^0.0.51",
+    "@langchain/openai": "^0.0.28",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.2.0",
     "@nestjs/core": "^9.0.0",
@@ -30,6 +32,7 @@
     "@nestjs/mongoose": "^10.0.4",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^10.0.2",
+    "langchain": "^0.1.35",
     "mongoose": "^8.1.1",
     "nest-commander": "^3.12.5",
     "nest-commander-schematics": "^3.0.0",

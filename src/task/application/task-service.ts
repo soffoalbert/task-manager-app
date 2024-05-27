@@ -3,6 +3,8 @@ import { TaskFactory } from '../domain/factories/task-factory';
 import { TaskRepository } from './ports/task.repository';
 import { Task } from '../domain/task';
 import { TaskStatus } from '../domain/value-objects/task-status';
+import { UpdateTaskDTO } from './dto/update-task.dto';
+import { ChatOpenAI } from 'langchain/chat_models/openai';
 
 @Injectable()
 export class TaskService {
